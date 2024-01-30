@@ -57,6 +57,8 @@ sum_ssp <- function(sp, ssp) {
     filter(!(common_name %in% ssp))
 }
 
+# saveRDS(sum_ssp, "sum_ssp.rds")
+
 # Run function
 df <- sum_ssp("Brant", "Brant (Black)")
 df <- sum_ssp("Tundra Swan", "Tundra Swan (Whistling)")
