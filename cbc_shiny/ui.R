@@ -4,9 +4,9 @@ library(shinydashboard)
 
 # load dataset
 df <- readRDS("sb_cbc_df.rds")
-df_effort <- read_rds("df_effort.rds")
-tot_count_by_year <- read_rds("tot_count_by_year.rds")
-tot_sp <- read_rds("tot_sp_df.rds")
+df_effort <- readRDS("df_effort.rds")
+tot_count_by_year <- readRDS("tot_count_by_year.rds")
+tot_sp <- readRDS("tot_sp_df.rds")
 
 ui <- navbarPage("CBC", theme = shinytheme("flatly"),
                 tabPanel(title = "Count by species",
