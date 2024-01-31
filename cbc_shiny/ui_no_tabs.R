@@ -32,7 +32,7 @@ ui <- fluidPage(
         In some cases where misidentification was deemed likely by Lehman, I have replaced the species with slashes. For example, high numbers of Short-billed Dowitcher in the 70s and 80s have been replaced by 'Short-billed/Long-billed Dowitcher.'"),
       p("A note on interpretation of trends. The number of individuals detected in any given year may be influenced by participant effort, measured as total participant-hours. Effort increased in the 1960s, but has remained stable (with some fluctuations) since then. The number of hours in the last year (2022) is very similar to the number of hours in 1970. Hence, any secular trends in the number of individuals counted cannot be attributed to changes in effort, and are likely the result of actual changes in bird populations."),
       p("While some species have increased in numbers and some have decreased, overall numbers are down over time. In the early 1970s, an average of about 50,000 individuals were counted every year. By 2020, this number was down to about 30,000, a drop by about 40%."),
-      p("Code available at https://github.com/linusblomqvist/cbc_shiny")
+      HTML("<p>Code available <a href = 'https://github.com/linusblomqvist/cbc_shiny'>here.</a><p>")
     )
     
   )

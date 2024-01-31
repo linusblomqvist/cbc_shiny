@@ -1,6 +1,7 @@
 library(shiny)
 library(tidyverse)
 library(scales)
+options(encoding = "UTF-8")
 
 # load dataset
 df <- readRDS("sb_cbc_df.rds")
@@ -33,10 +34,10 @@ server <- function(input, output) {
       labs(y = "party-hours") +
       geom_line() +
       scale_x_continuous(breaks = seq(1960, 2020, 10),
-                         minor_breaks = seq(min(df_effort$year, na.rm = TRUE), 
+                         minor_breaks = seq(min(df_effort$year, na.rm = TRUE),
                                             max(df_effort$year, na.rm = TRUE), 1))
   })
-  
+
   output$tot_count <- renderPlot({
     tot_count_by_year %>%
       ggplot(aes(x = year, y = sum_by_year)) +
@@ -44,10 +45,10 @@ server <- function(input, output) {
       ylim(0, NA) +
       labs(y = "total # individuals") +
       scale_x_continuous(breaks = seq(1960, 2020, 10),
-                         minor_breaks = seq(min(tot_count_by_year$year, na.rm = TRUE), 
+                         minor_breaks = seq(min(tot_count_by_year$year, na.rm = TRUE),
                                             max(tot_count_by_year$year, na.rm = TRUE), 1))
   })
-  
+
   output$tot_sp <- renderPlot({
     tot_sp %>%
       ggplot(aes(x = year, y = tot_sp_by_year)) +
@@ -55,7 +56,7 @@ server <- function(input, output) {
       ylim(0, NA) +
       labs(y = "total # species") +
       scale_x_continuous(breaks = seq(1960, 2020, 10),
-                         minor_breaks = seq(min(tot_sp$year, na.rm = TRUE), 
+                         minor_breaks = seq(min(tot_sp$year, na.rm = TRUE),
                                             max(tot_sp$year, na.rm = TRUE), 1))
   })
 }
