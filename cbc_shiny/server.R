@@ -23,7 +23,8 @@ server <- function(input, output) {
       scale_x_continuous(breaks = seq(min(df$year, na.rm = TRUE), max(df$year, na.rm = TRUE), 5),
                          minor_breaks = seq(min(df$year, na.rm = TRUE), max(df$year, na.rm = TRUE), 1)) +
       ylim(0, NA) +
-      theme(plot.title = element_text(hjust = 0.5)) +
+      theme(plot.title = element_text(hjust = 0.5),
+            text = element_text(size=15)) +
       scale_y_continuous(breaks = pretty_breaks())
   })
   
@@ -32,9 +33,10 @@ server <- function(input, output) {
       ggplot(aes(x = year, y = hours)) +
       labs(y = "party-hours") +
       geom_line() +
-      scale_x_continuous(breaks = seq(1960, 2020, 10),
+      scale_x_continuous(breaks = seq(min(df_effort$year, na.rm = TRUE), max(df_effort$year, na.rm = TRUE), 5),
                          minor_breaks = seq(min(df_effort$year, na.rm = TRUE),
-                                            max(df_effort$year, na.rm = TRUE), 1))
+                                            max(df_effort$year, na.rm = TRUE), 1)) +
+      theme(text = element_text(size=15))
   })
 
   output$tot_count <- renderPlot({
@@ -45,7 +47,8 @@ server <- function(input, output) {
       labs(y = "total # individuals") +
       scale_x_continuous(breaks = seq(1960, 2020, 10),
                          minor_breaks = seq(min(tot_count_by_year$year, na.rm = TRUE),
-                                            max(tot_count_by_year$year, na.rm = TRUE), 1))
+                                            max(tot_count_by_year$year, na.rm = TRUE), 1)) +
+      theme(text = element_text(size=15))
   })
 
   output$tot_sp <- renderPlot({
@@ -56,6 +59,7 @@ server <- function(input, output) {
       labs(y = "total # species") +
       scale_x_continuous(breaks = seq(1960, 2020, 10),
                          minor_breaks = seq(min(tot_sp$year, na.rm = TRUE),
-                                            max(tot_sp$year, na.rm = TRUE), 1))
+                                            max(tot_sp$year, na.rm = TRUE), 1)) +
+      theme(text = element_text(size=15))
   })
 }
