@@ -20,7 +20,7 @@ server <- function(input, output) {
       ggplot(aes(x = year, y = count, group = 1)) +
       labs(title = input$species) +
       geom_line() +
-      scale_x_continuous(breaks = seq(min(df$year, na.rm = TRUE), max(df$year, na.rm = TRUE), 5),
+      scale_x_continuous(breaks = seq(min(df$year, na.rm = TRUE), max(df$year, na.rm = TRUE), 10),
                          minor_breaks = seq(min(df$year, na.rm = TRUE), max(df$year, na.rm = TRUE), 1)) +
       ylim(0, NA) +
       theme(plot.title = element_text(hjust = 0.5),
@@ -33,7 +33,7 @@ server <- function(input, output) {
       ggplot(aes(x = year, y = hours)) +
       labs(y = "party-hours") +
       geom_line() +
-      scale_x_continuous(breaks = seq(min(df_effort$year, na.rm = TRUE), max(df_effort$year, na.rm = TRUE), 5),
+      scale_x_continuous(breaks = seq(min(df_effort$year, na.rm = TRUE), max(df_effort$year, na.rm = TRUE), 10),
                          minor_breaks = seq(min(df_effort$year, na.rm = TRUE),
                                             max(df_effort$year, na.rm = TRUE), 1)) +
       theme(text = element_text(size=15))

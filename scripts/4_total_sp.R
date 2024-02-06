@@ -27,4 +27,8 @@ tot_sp_df <- data.frame(year = 1960:2022)
 tot_sp_df <- tot_sp_df %>%
   left_join(tot_sp_by_year, by = "year")
 
+tot_sp_2023 <- data.frame(year = 2023, tot_sp_by_year = 194)
+
+tot_sp_df <- bind_rows(tot_sp_df, tot_sp_2023)
+
 saveRDS(tot_sp_df, "cbc_shiny/tot_sp_df.rds")
