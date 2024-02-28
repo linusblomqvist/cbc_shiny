@@ -1,6 +1,7 @@
 library(shiny)
 library(shinythemes)
 library(shinydashboard)
+library(plotly)
 
 # load dataset
 df <- readRDS("sb_cbc_df.rds")
@@ -9,6 +10,7 @@ tot_count_by_year <- readRDS("tot_count_by_year.rds")
 tot_sp <- readRDS("tot_sp_df.rds")
 
 ui <- navbarPage("Santa Barbara CBC", theme = shinytheme("flatly"),
+                tags$head(includeHTML("google-analytics.Rhtml")),
                 tabPanel(title = "Count by species",
                          sidebarLayout(      
                            
@@ -23,17 +25,17 @@ ui <- navbarPage("Santa Barbara CBC", theme = shinytheme("flatly"),
                            
                            # Create a spot for the barplot
                            mainPanel(
-                             plotOutput("trendline")
+                             plotlyOutput("trendline")
                            )
                            
                          )
                 ),
                 tabPanel("Effort",
-                         plotOutput("effort")),
+                         plotlyOutput("effort")),
                 tabPanel("Total species",
-                         plotOutput("tot_sp")),
+                         plotlyOutput("tot_sp")),
                 tabPanel("Total # individuals",
-                         plotOutput("tot_count")),
+                         plotlyOutput("tot_count")),
                 tabPanel("Data processing",
                          HTML("<p>Data from National Audubon Society (<a href = https://netapp.audubon.org/CBCObservation/Historical/ResultsByCount.aspx>here</a>). Web app by Linus Blomqvist (code <a href = https://github.com/linusblomqvist/cbc_shiny>here</a>).<br><br>
                          The raw data have been adjusted in several ways:<br>
