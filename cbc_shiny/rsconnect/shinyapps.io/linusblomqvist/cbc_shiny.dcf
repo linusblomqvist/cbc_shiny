@@ -5,6 +5,6 @@ account: linusblomqvist
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10978037
-bundleId: 8308805
+bundleId: 9537811
 url: https://linusblomqvist.shinyapps.io/cbc_shiny/
 version: 1

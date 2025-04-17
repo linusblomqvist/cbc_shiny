@@ -10,9 +10,33 @@ tot_count_by_year <- readRDS("tot_count_by_year.rds")
 tot_sp <- readRDS("tot_sp_df.rds")
 
 # Define a server for the Shiny app
-server <- function(input, output) {
+server <- function(input, output, session) {
   
-  # Fill in the spot we created for a plot
+  # Pre-select species if provided in the query string
+  observe({
+    query <- parseQueryString(session$clientData$url_search)
+    if (!is.null(query$species) && query$species %in% df$common_name) {
+      updateSelectInput(session, "species", selected = query$species)
+    }
+  })
+  
+  # Generate a shareable URL dynamically
+  output$app_url <- renderUI({
+    req(input$species)  # Ensure a species is selected
+    
+    # Build the current full URL with query parameter
+    full_url <- paste0(
+      session$clientData$url_protocol, "://",
+      session$clientData$url_hostname,
+      session$clientData$url_pathname,
+      "?species=", URLencode(input$species)
+    )
+    
+    # Display the URL as a clickable hyperlink
+    tags$a(href = full_url, target = "_blank", full_url)
+  })
+  
+  # Fill in the spot for the trendline plot
   output$trendline <- renderPlotly({
     ggplotly(
       df %>%
@@ -28,10 +52,9 @@ server <- function(input, output) {
               text = element_text(size = 12)) +
         scale_y_continuous(breaks = pretty_breaks())
     )
-    # Render a line plot
-
   })
   
+  # Effort plot
   output$effort <- renderPlotly({
     ggplotly(
       df_effort %>%
@@ -42,11 +65,11 @@ server <- function(input, output) {
                            minor_breaks = seq(min(df_effort$year, na.rm = TRUE),
                                               max(df_effort$year, na.rm = TRUE), 5)) +
         theme_bw() +
-        theme(text = element_text(size=12))
+        theme(text = element_text(size = 12))
     )
-
   })
-
+  
+  # Total count plot
   output$tot_count <- renderPlotly({
     ggplotly(
       tot_count_by_year %>%
@@ -59,11 +82,11 @@ server <- function(input, output) {
                            minor_breaks = seq(min(tot_count_by_year$year, na.rm = TRUE),
                                               max(tot_count_by_year$year, na.rm = TRUE), 5)) +
         theme_bw() +
-        theme(text = element_text(size=12))
+        theme(text = element_text(size = 12))
     )
-
   })
-
+  
+  # Total species plot
   output$tot_sp <- renderPlotly({
     ggplotly(
       tot_sp %>%
@@ -76,8 +99,7 @@ server <- function(input, output) {
                            minor_breaks = seq(min(tot_sp$year, na.rm = TRUE),
                                               max(tot_sp$year, na.rm = TRUE), 5)) +
         theme_bw() +
-        theme(text = element_text(size=12))
+        theme(text = element_text(size = 12))
     )
-
   })
 }

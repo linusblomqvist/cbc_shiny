@@ -10,34 +10,35 @@ tot_count_by_year <- readRDS("tot_count_by_year.rds")
 tot_sp <- readRDS("tot_sp_df.rds")
 
 ui <- navbarPage("Santa Barbara CBC", theme = shinytheme("flatly"),
-                tags$head(includeHTML("google-analytics.Rhtml")),
-                tabPanel(title = "Count by species",
-                         sidebarLayout(      
-                           
-                           # Define the sidebar with one input
-                           sidebarPanel(
-                             selectInput("species", "Species:", 
-                                         choices = unique(df$common_name),
-                                         selected = sample(unique(df$common_name), 1)),
-                             hr()#,
-                             #helpText("Data from the National Audubon Society, with adjustments to account for changing taxonomy, erroneous records, and the like. Web app by Linus Blomqvist. ")
-                           ),
-                           
-                           # Create a spot for the barplot
-                           mainPanel(
-                             plotlyOutput("trendline")
-                           )
-                           
-                         )
-                ),
-                tabPanel("Effort",
-                         plotlyOutput("effort")),
-                tabPanel("Total species",
-                         plotlyOutput("tot_sp")),
-                tabPanel("Total # individuals",
-                         plotlyOutput("tot_count")),
-                tabPanel("Data processing",
-                         HTML("<p>Data from National Audubon Society (<a href = https://netapp.audubon.org/CBCObservation/Historical/ResultsByCount.aspx>here</a>). Web app by Linus Blomqvist (code <a href = https://github.com/linusblomqvist/cbc_shiny>here</a>).<br><br>
+                 tags$head(includeHTML("google-analytics.Rhtml")),
+                 
+                 tabPanel(title = "Count by species",
+                          sidebarLayout(      
+                            # Define the sidebar with one input
+                            sidebarPanel(
+                              selectInput("species", "Species:", 
+                                          choices = unique(df$common_name),
+                                          selected = sample(unique(df$common_name), 1))
+                            ),
+                            
+                            # Create a spot for the barplot
+                            mainPanel(
+                              plotlyOutput("trendline")
+                            )
+                          )
+                 ),
+                 
+                 tabPanel("Effort",
+                          plotlyOutput("effort")),
+                 
+                 tabPanel("Total species",
+                          plotlyOutput("tot_sp")),
+                 
+                 tabPanel("Total # individuals",
+                          plotlyOutput("tot_count")),
+                 
+                 tabPanel("Data processing",
+                          HTML("<p>Data from National Audubon Society (<a href = https://netapp.audubon.org/CBCObservation/Historical/ResultsByCount.aspx>here</a>). Web app by Linus Blomqvist (code <a href = https://github.com/linusblomqvist/cbc_shiny>here</a>).<br><br>
                          The raw data have been adjusted in several ways:<br>
 <li>Expected subspecies (or subspecies groups) have been merged with the species. For example, Northern Flicker (Red-shafted) has been folded into Northern Flicker.</li>
 <li>In some cases, spuhs and slashes have been folded into species. For example, 'jay sp.' appears to refer to Western (now California) Scrub-Jay in some years, and large numbers of 'Glossy/White-faced Ibis' can be assumed to be White-faced Ibis.</li>

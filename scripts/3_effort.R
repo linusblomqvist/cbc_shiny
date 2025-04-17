@@ -26,6 +26,6 @@ df_effort$count_no <- df_effort$count_no - 1 + 1900
 colnames(df_effort)[1] <- "year"
 
 df_effort <- bind_rows(data.frame(year = 1960, hours = NA),
-                       df_effort)
+                       df_effort, data.frame(year = 2023, hours = 281))
 
 saveRDS(df_effort, "cbc_shiny/df_effort.rds")
